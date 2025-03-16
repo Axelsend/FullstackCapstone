@@ -22,7 +22,7 @@ client
   .then(() => console.log("Connected to PostgreSQL"))
   .catch((err) => console.error("Connection error", err.stack));
 
-app.get("/albums", async (req, res) => {
+app.get("/api/albums", async (req, res) => {
   try {
     const albums = await getAlbums();
     res.status(200).json(albums);
