@@ -1,0 +1,35 @@
+const express = require('express');
+const albumsRouter = express.Router();
+
+const {
+  getAllAlbums,
+  getAlbumsById,
+} = require('../db/index.js');
+
+albumsRouter.get('/', async (req, res, next) => {
+    try {
+      const response = await getAllAlbums();
+    const allAlbums = response.rows
+    res.setHeader('Content-Type', 'application/json');
+      res.json(
+        allAlbums
+      );
+    } catch ({ name, message }) {
+      next({ name, message });
+    }
+  });
+
+  albumsRouter.get('/:albumId', async (req, res, next) => {
+    try {
+      const { albumId } = req.params;
+      const singleAlbum = await getAlbumsById(albumId);
+    
+      res.send({
+        singleAlbum
+      });
+    } catch ({ name, message }) {
+      next({ name, message });
+    }
+  });
+
+module.exports = albumsRouter;

@@ -1,36 +1,32 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
+require('dotenv').config();
 
-const app = express();
-const port = process.env.PORT || 3000;
+const { PORT = 3000 } = process.env;
+const express = require('express');
+const server = express();
+const cors = require('cors')
 
-const { client } = require("./client.js");
-const { createTablesAndData, getAlbums } = require("./api.js");
+const bodyParser = require('body-parser');
+server.use(bodyParser.json());
 
-app.use(cors());
-app.use(express.json());
+const morgan = require('morgan');
+server.use(morgan('dev'));
 
-const bodyParser = require("body-parser");
-app.use(bodyParser.json());
+server.use((req, res, next) => {
+  console.log("<____Body Logger START____>");
+  console.log(req.body);
+  console.log("<_____Body Logger END_____>");
 
-const morgan = require("morgan");
-app.use(morgan("dev"));
-
-client
-  .connect()
-  .then(() => console.log("Connected to PostgreSQL"))
-  .catch((err) => console.error("Connection error", err.stack));
-
-app.get("/api/albums", async (req, res) => {
-  try {
-    const albums = await getAlbums();
-    res.status(200).json(albums);
-  } catch (err) {
-    res.status(500).json({ error: "Error fetching albums" });
-  }
+  next();
 });
 
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+const apiRouter = require('./api');
+server.use('/api', apiRouter);
+
+// const { client } = require('./db/client');
+// client.connect();
+
+server.listen(PORT, () => {
+  console.log("The server is up on port", PORT);
 });
+server.use(cors({origin: "http://localhost:5173"}));
+server.use(express.json());
