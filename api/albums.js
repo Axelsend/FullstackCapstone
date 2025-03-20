@@ -24,7 +24,7 @@ albumsRouter.get('/', async (req, res, next) => {
     try {
       const { albumId } = req.params;
       const singleAlbum = await getAlbumsById(albumId);
-    
+    console.log(singleAlbum)
       res.send({
         singleAlbum
       });

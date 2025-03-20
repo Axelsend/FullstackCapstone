@@ -1,26 +1,21 @@
 import React, { useState, useEffect } from "react";
-// import SingleAlbum from "./SingleAlbum";
-// import { useNavigate } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 
 const Albums = () => {
   const [albums, setAlbums] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchObjects = async () => {
+    const fetchAlbums = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:3000/api/albums"
-        );
+        const response = await fetch("http://localhost:3000/api/albums");
         if (!response.ok) {
           throw new Error("Failed to fetch albums");
         }
         const data = await response.json();
         setAlbums(data);
-        console.log(data)
       } catch (err) {
         setError(err.message);
       } finally {
@@ -28,23 +23,21 @@ const Albums = () => {
       }
     };
 
-    fetchObjects();
+    fetchAlbums();
   }, []);
 
   if (loading) {
-    return <div>Loading objects...</div>;
+    return <div>Loading albums...</div>;
   }
 
   if (error) {
     return <div>Error: {error}</div>;
   }
 
-  // const history = useNavigate();
-
-  // const handleViewDetails = (bookId) => {
-  //   setSelectedItem()
-  //   history.push(`/${bookId}`);
-  // };
+  const handleViewDetails = (albumId) => {
+    const album = albums.find((album) => album.id === albumId);
+    navigate(`/${albumId}`);
+  };
 
   return (
     <div>
@@ -53,13 +46,21 @@ const Albums = () => {
         <ul className="albums-list">
           {albums.map((object) => (
             <li key={object.id}>
-              <img src={`../src/albumimages/${object.albumart}`} alt={object.name} width="200px"/>
+              <img
+                src={`../src/albumimages/${object.albumart}`}
+                alt={object.name}
+                width="200px"
+              />
               <br />
               <strong>{object.name}</strong> by {object.artistName}
+              <button onClick={() => handleViewDetails(object.id)}>
+                See Details
+              </button>
             </li>
           ))}
         </ul>
       </div>
+
     </div>
   );
 };

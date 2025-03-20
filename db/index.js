@@ -197,7 +197,7 @@ client
   async function getAlbumsById(albumId) {
     try {
       const {
-        album,
+        rows: [album],
       } = await client.query(
         `
         SELECT *

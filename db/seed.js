@@ -998,7 +998,7 @@ async function createTables() {
           song14: '', 
           song15: '', 
           genre: 'R&B', 
-          albumArt: 'beyonce.jpg', 
+          albumArt: 'beyonce.png', 
           spotifyLink: 'https://open.spotify.com/artist/6vWDO969PvNqNYHIOW5v0m' 
         },);
 
@@ -1143,7 +1143,7 @@ async function createTables() {
         song14: '', 
         song15: '', 
         genre: 'Alternative', 
-        albumArt: 'moonpool.jpg', 
+        albumArt: 'moonpool.png', 
         spotifyLink: 'https://open.spotify.com/album/2ix8vWvvSp2Yo7rKMiWpkg' 
       },);
 
