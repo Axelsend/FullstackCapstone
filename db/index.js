@@ -1,10 +1,10 @@
 require("dotenv").config();
+
+const { client } = require("./client.js");
 const express = require("express");
 const cors = require("cors");
 
 const app = express();
-const port = process.env.PORT || 3000;
-const { client } = require("./client.js");
 
 app.use(cors());
 app.use(express.json());
@@ -14,6 +14,9 @@ app.use(bodyParser.json());
 
 const morgan = require("morgan");
 app.use(morgan("dev"));
+
+console.log('DB_USER:', process.env.DB_USER);
+console.log('DB_PASSWORD:', process.env.DB_PASSWORD);
 
 client
   .connect()
@@ -94,6 +97,7 @@ client
           albumArt,
           spotifyLink]
       );
+      return albums
     } catch (error) {
       throw error;
     }
@@ -132,6 +136,7 @@ client
       throw error;
     }
   }
+
 
   async function getAllUsers() {
     try {
@@ -215,15 +220,12 @@ client
     }
   }
 
-// app.listen(port, () => {
-//   console.log(`Server running on http://localhost:${port}`);
-// });
-
 module.exports = {
   createUser,
   getAllUsers,
   getUserById,
   getUserByUsername,
   getAllAlbums,
-  getAlbumsById
+  getAlbumsById,
+  createAlbums
 };

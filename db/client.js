@@ -1,13 +1,12 @@
-// backend-starter-repo/index.js
-require("dotenv").config();
+require('dotenv').config();
 const { Client } = require("pg");
-
+console.log('DB_HOST:', process.env.DB_HOST);
 const client = new Client({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
+  user: "denver.axelsen",
+  password: "new_secure_password",
+  host: "localhost",
+  database: "capstone_db",
   port: process.env.DB_PORT,
 });
 
-module.exports = { client };
+module.exports = { client }

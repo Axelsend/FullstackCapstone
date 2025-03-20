@@ -3,7 +3,9 @@ const {
   createAlbums
 } = require('./index.js');
 
+require('dotenv').config();
 const { client } = require("./client.js");
+console.log('DB_USER:', process.env.DB_USER);
 
 async function dropTables() {
     try {
@@ -85,20 +87,19 @@ async function createTables() {
   async function createInitialUsers() {
     try {
       console.log("Starting to create users...");
-  
+
       await createUser({ 
-        username: "albert", 
-        password: "bertie99",
+        username: 'albert', 
+        password: 'bertie99',
       });
       await createUser({ 
-        username: "sandra", 
-        password: "2sandy4me",
+        username: 'sandra', 
+        password: '2sandy4me',
       });
       await createUser({ 
         username: 'glamgal',
         password: 'soglam',
       });
-      
       console.log("Finished creating users!");
     } catch (error) {
       console.error("Error creating users!");
@@ -108,7 +109,7 @@ async function createTables() {
 
   async function createInitialAlbums() {
     try {
-  
+  console.log("Starting to seed albums")
       await createAlbums(
         { 
           name: 'Future Nostalgia', 
@@ -1310,7 +1311,7 @@ async function createTables() {
         song14: '', 
         song15: '', 
         genre: 'Pop', 
-        albumArt: '25.jpg', 
+        albumArt: '25.png', 
         spotifyLink: 'https://open.spotify.com/album/3sFhg2dRAOB5ztiC4Rys6B' 
       });
   
@@ -1322,20 +1323,13 @@ async function createTables() {
     }
   }
 
-async function rebuildDB() {
-  try {
-    client.connect();
+async function seed() {
 
     await dropTables();
     await createTables();
-    await createInitialAlbums();
     await createInitialUsers();
-  } catch (error) {
-    console.log("Error during rebuildDB")
-    throw error;
-  }
-}
+    await createInitialAlbums();
+    
+  } 
 
-rebuildDB()
-  .catch(console.error)
-  .finally(() => client.end());
+seed().catch(console.error)

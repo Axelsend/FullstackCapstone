@@ -1,5 +1,6 @@
 const express = require('express');
 const albumsRouter = express.Router();
+albumsRouter.use(express.json());
 
 const {
   getAllAlbums,
