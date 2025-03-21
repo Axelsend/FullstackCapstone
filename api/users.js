@@ -1,7 +1,7 @@
 const express = require("express");
 const usersRouter = express.Router();
 require("dotenv").config();
-const JWT_SECRET = process.env.JWT || 'shhh';
+const JWT_SECRET = process.env.JWT;
 const { client } = require("../db/client.js")
 
 const { createUser, getAllUsers, getUserByUsername, getUserById } = require("../db/index.js");
@@ -23,7 +23,8 @@ usersRouter.get("/", async (req, res, next) => {
 });
 
 usersRouter.get('/:id', async (req, res, next) => {
-  try {
+
+try {
     const { id } = req.params;
     const singleUser = await getUserById(id);
   
@@ -78,12 +79,12 @@ usersRouter.post("/login", async (req, res, next) => {
   }
 });
 
-  usersRouter.delete("/:id", async (req, res, next) => {
-    const { id } = req.params;
+  usersRouter.delete("/delete", async (req, res, next) => {
+    const { username } = req.body;
     try {
       const response = await client.query(
-        "DELETE FROM users WHERE id = $1",
-        [id]
+        "DELETE FROM users WHERE username = $1",
+        [username]
       );
       res.json({ message: "User deleted successfully" });
     } catch (ex) {
@@ -91,14 +92,13 @@ usersRouter.post("/login", async (req, res, next) => {
     }}
   )
 
-  usersRouter.put('/:id', async (req, res, next) => {
-    const { id } = req.params;
-    const { password } = req.body
+  usersRouter.put('/update', async (req, res, next) => {
+    const { username, password } = req.body;
 
     try {
       const response = await client.query(
-        "UPDATE users SET password = $1 WHERE id = $2",
-        [password, id]
+        "UPDATE users SET password = $1 WHERE username = $2",
+        [password, username]
       );
       res.json({ message: "Password updated successfully" });
       if (response.rowCount === 0) {

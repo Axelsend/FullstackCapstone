@@ -64,7 +64,7 @@ async function createTables() {
 
         CREATE TABLE reviews (
           id SERIAL PRIMARY KEY,
-          "userId" INTEGER REFERENCES users(id),
+          "albumId" INTEGER REFERENCES albums(id),
           content TEXT NOT NULL,
           rating INTEGER,
           active BOOLEAN DEFAULT true

@@ -40,8 +40,8 @@ const Albums = () => {
   };
 
   return (
-    <div>
-      <h2>Browse the 'Sphere!</h2>
+    <div className="album">
+      <h2>Browse the Sphere!</h2>
       <div>
         <ul className="albums-list">
           {albums.map((object) => (
@@ -49,10 +49,11 @@ const Albums = () => {
               <img
                 src={`../src/albumimages/${object.albumart}`}
                 alt={object.name}
-                width="200px"
+                width="250px"
               />
               <br />
-              <strong>{object.name}</strong> by {object.artistName}
+              <strong1>{object.name}</strong1> 
+              <strong2>by {object.artistname}</strong2>
               <button onClick={() => handleViewDetails(object.id)}>
                 See Details
               </button>

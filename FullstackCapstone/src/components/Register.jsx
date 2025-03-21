@@ -55,8 +55,8 @@ const RegistrationForm = () => {
 
       {success && <p>Account created successfully!</p>}
       {error && <p>{error}</p>}
-
-      <form onSubmit={handleSubmit}>
+<div className=" form-wrapper">
+      <form onSubmit={handleSubmit} className="form1">
 
         <div>
           <label htmlFor="email">Username:</label>
@@ -86,6 +86,7 @@ const RegistrationForm = () => {
           {loading ? "Creating account..." : "Register"}
         </button>
       </form>
+      </div>
     </div>
   );
 };
