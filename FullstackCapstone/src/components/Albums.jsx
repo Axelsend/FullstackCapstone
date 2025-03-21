@@ -49,7 +49,7 @@ const Albums = () => {
               <img
                 src={`../src/albumimages/${object.albumart}`}
                 alt={object.name}
-                width="250px"
+                width="80%"
               />
               <br />
               <strong1>{object.name}</strong1> 
