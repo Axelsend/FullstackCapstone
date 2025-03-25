@@ -22,7 +22,7 @@ const UpdateUser = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/api/users/update`, {
+      const response = await fetch(`https://soundsphere-jr5b.onrender.com/api/users/update`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

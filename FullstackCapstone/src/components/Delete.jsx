@@ -21,7 +21,7 @@ const DeleteUser = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/api/users/delete`, {
+      const response = await fetch(`https://soundsphere-jr5b.onrender.com/api/users/delete`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

@@ -10,7 +10,7 @@ const Albums = () => {
   useEffect(() => {
     const fetchAlbums = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/albums");
+        const response = await fetch("https://soundsphere-jr5b.onrender.com/api/albums");
         if (!response.ok) {
           throw new Error("Failed to fetch albums");
         }

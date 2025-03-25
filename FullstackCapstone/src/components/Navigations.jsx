@@ -15,7 +15,7 @@ function Navbar() {
           <Link className="link" to="/register">Register</Link>
         </li>
         <li>
-          <Link className="link" to="/update">Update Passsword</Link>
+          <Link className="link" to="/update">Update Password</Link>
         </li>
         <li>
           <Link className="link" to="/delete">Delete User</Link>

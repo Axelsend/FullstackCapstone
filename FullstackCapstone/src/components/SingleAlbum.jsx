@@ -14,7 +14,7 @@ function SingleAlbum() {
 
       try {
         const response = await fetch(
-          `http://localhost:3000/api/albums/${albumId}`
+          `https://soundsphere-jr5b.onrender.com/api/albums/${albumId}`
         );
         const data = await response.json();
         setAlbum(data.singleAlbum);

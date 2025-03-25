@@ -21,7 +21,7 @@ const RegistrationForm = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/api/users/register",
+        "https://soundsphere-jr5b.onrender.com/api/users/register",
         {
           method: "POST",
           headers: {
